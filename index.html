@@ -27,8 +27,7 @@
                 background-color: wheat;
                 border: 6px solid burlywood;
                 width: 18%;
-                height: 
-                80%;
+                height: 80%;
             }
             .MenuButton {
                 width: 32%;
@@ -37,7 +36,7 @@
                 border: 4px solid burlywood;
                 font-size: 110%;
                 position: absolute;
-                left: 5%;
+                left: 4%;
             }
             .MenuText {
                 font-size: 110%;
@@ -51,8 +50,14 @@
             }
             #leftSide {
                 position: absolute;
-                top: 4%;
+                top: 6%;
                 left: 1%;
+                height: 80%;
+                width: 20%;
+            }
+            #adImg {
+                max-width: 100%;
+                height: auto;
             }
         </style>
     </head>
@@ -66,7 +71,7 @@
             <h2 class="center">Kn&auml;cke produktion:</h2>
             <div>
                 <button class="MenuButton" id="b1" onclick="buyUpgrade('b1')">20</button>
-                <p style="left: 42%; top: 11%;" class="MenuText" id="kneckPerClickDis">Kn&auml;ck p&auml;r click: 1</p>
+                <p style="left: 40%; top: 11%;" class="MenuText" id="kneckPerClickDis">Kn&auml;ck p&auml;r click: 1</p>
             </div>
         </div>
 
@@ -76,7 +81,7 @@
         
         <div id="leftSide">
             <a href="https://www.kakservice.se/Shop/Felix-Karlberg/48072144" target="_blank" rel="noopener noreferrer">
-                <img src="KneckeClicker1.png" style="height: 60%; width: auto;">
+                <img src="KneckeClicker1.png"  id="adImg">
             </a>
         </div>
 
@@ -86,10 +91,19 @@
                 "b1": 20
             };
             var antalKneck = 0;
-           
+            
+            var KneckSound = new Audio('KneckeCrack.mp3')
+            
             function addKneck(antal) {
-                antalKneck += antal
-                document.getElementById("kneckAntal").innerHTML = "Du har " + antalKneck + " Kn&auml;cke"
+                antalKneck += antal;
+                document.getElementById("kneckAntal").innerHTML = "Du har " + antalKneck + " Kn&auml;cke";
+                document.getElementById("kneck").style.transform = "rotate(5deg)";
+                
+                KneckSound.play();
+                
+                setTimeout(function() {
+                    document.getElementById("kneck").style.transform = "rotate(0deg)";
+                }, 150);
             };
 
             function buyUpgrade(buttonId) {
@@ -101,9 +115,9 @@
                         else
                             upgradePrices["b1"] = upgradePrices["b1"] * 2;
                         KneckPerClick += 1;
-                        document.getElementById("kneckPerClickDis").innerHTML = "Kn&auml;ck p&auml;r click: " + KneckPerClick
-                        document.getElementById("kneckAntal").innerHTML = "Du har " + antalKneck + " Kn&auml;cke"
-                        document.getElementById("b1").innerHTML = upgradePrices["b1"]
+                        document.getElementById("kneckPerClickDis").innerHTML = "Kn&auml;ck p&auml;r click: " + KneckPerClick;
+                        document.getElementById("kneckAntal").innerHTML = "Du har " + antalKneck + " Kn&auml;cke";
+                        document.getElementById("b1").innerHTML = upgradePrices["b1"];
                     };
                 };
             };
